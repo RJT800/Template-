@@ -16,7 +16,20 @@ namespace HelloDungeon
         private float _stamina;
         private Weapon _currentWeapon;
 
-    public float GetDamage()
+
+
+    public Character(string name, float health, float damage, float defense, float defenseboost, float stamina, Weapon currentWeapon)
+        {
+            _name = name;
+            _health = health;
+            _damage = damage;
+            _defense = defense;
+            _defenseboost = defenseboost;
+            _stamina = stamina;
+            _currentWeapon = currentWeapon;
+        }
+
+        public float GetDamage()
         {
             return _damage;
         }
@@ -29,6 +42,12 @@ namespace HelloDungeon
         {
             return _currentWeapon;
         }
+
+    public string GetName()
+        {
+            return _name;
+        }
+
     public void RaiseDefense()
         {
             _defense += _defenseboost;
@@ -38,6 +57,10 @@ namespace HelloDungeon
         {
             _defense -= _defenseboost;
         }
+
+
+
+
 
     public void PrintStats()
     {
