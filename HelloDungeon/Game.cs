@@ -24,27 +24,36 @@ namespace HelloDungeon
         bool gameOver;
         int currentScene = 0;
 
+
+        //initializes the character (establishing that they exist, not stating their stats)
+        //this is the first step?
         Character JoePable;
         Character JohnCena;
         Character LucyJill;
+        Character Gu7y;
         Character[] Enemies;
         int currentEnemyIndex = 0;
 
-        Character Player;
+
+        // this means its not set to look at anything and when its not set to look at something, it (by default) looks at 0, or in other words; null;
+        Player Player;
 
 
         void Fight(ref Character monster2)
         {
+            Console.WriteLine("\n\n");
             Player.PrintStats();
+            Console.WriteLine("\n\n");
             monster2.PrintStats();
+            Console.WriteLine("\n\n");
 
             bool isDefending = false;
-            string battleChoice = GetInput("Choose an action", "Attack", "Defend", "Run");
+            string battleChoice = Player.GetInput("Choose an action", "Attack", "Defend", "Run");
 
             if (battleChoice == "1")
             {
                 monster2.TakeDamage(Player.GetDamage());
-                Console.WriteLine("You used " + Player.GetWeapon() + " !");
+                Console.WriteLine("You used " + Player.GetWeapon().Name + " !\n\n");
                 
                 if (monster2.GetHealth() <= 0)
                 {
@@ -81,36 +90,30 @@ namespace HelloDungeon
             return newHealth;
         }
 
-        string GetInput(string prompt, string option1, string option2, string option3)
-        {
-            string playerChoice = "";
 
-            Console.WriteLine(prompt);
-            Console.WriteLine("1." + option1);
-            Console.WriteLine("2." + option2);
-            Console.WriteLine("3." + option3);
-            Console.Write(">");
 
-            playerChoice = Console.ReadLine();
 
-            return playerChoice;
-        }
-
+        
         void CharacterSelectScene()
         {
-            string characterChoice = GetInput("Choose Your Character", JoePable.GetName(), JohnCena.GetName(), LucyJill.GetName());
+            Player = new Player();
+            string characterChoice = Player.GetInput("Choose Your Character", JoePable.GetName(), JohnCena.GetName(), LucyJill.GetName(), Gu7y.GetName());
 
             if (characterChoice == "1")
             {
-                Player = JoePable;
+                Player = new Player(JoePable.GetName(), JoePable.GetHealth(), JoePable.GetDamage(), JoePable.GetDefense(), JoePable.GetDefenseBoost(), JoePable.GetStamina(), JoePable.GetCurrentWeapon());
             }
             else if (characterChoice == "2")
             {
-                Player = JohnCena;
+                Player = new Player(JohnCena.GetName(), JohnCena.GetHealth(), JohnCena.GetDamage(), JohnCena.GetDefense(), JohnCena.GetDefenseBoost(), JohnCena.GetStamina(), JohnCena.GetCurrentWeapon());
             }
             else if (characterChoice == "3")
             {
-                Player = LucyJill;
+                Player = new Player(LucyJill.GetName(), LucyJill.GetHealth(), LucyJill.GetDamage(), LucyJill.GetDefense(), LucyJill.GetDefenseBoost(), LucyJill.GetStamina(), LucyJill.GetCurrentWeapon());
+            }
+            else if (characterChoice == "4")
+            {
+                Player = new Player(Gu7y.GetName(), Gu7y.GetHealth(), Gu7y.GetDamage(), Gu7y.GetDefense(), Gu7y.GetDefenseBoost(), Gu7y.GetStamina(), Gu7y.GetCurrentWeapon());
             }
             else
             {
@@ -163,7 +166,7 @@ namespace HelloDungeon
 
         void EndGameScene()
         {
-            string playerChoice = GetInput("You Died. Play Again?", "Yes", "No", "");
+            string playerChoice = Player.GetInput("You Died. Play Again?", "Yes", "No");
 
             if (playerChoice == "1")
             {
@@ -173,17 +176,25 @@ namespace HelloDungeon
             {
                 gameOver = true;
             }
+            else 
+            {
+                Console.WriteLine("invalid");
+                Console.ReadKey(true);
+                Console.Clear();
+                return;
+            }
+            Console.Clear();
         }
 
         void Start()
         {
             Weapon deezHandz;
             deezHandz.Name = "Deez Handz";
-            deezHandz.Damage = .5f;
+            deezHandz.Damage = 5f;
 
             Weapon chairAdjustment;
             chairAdjustment.Name = "Chair Adjustment";
-            chairAdjustment.Damage = 500.5f;
+            chairAdjustment.Damage = 7f;
 
             Weapon bidenBlast;
 
@@ -192,14 +203,22 @@ namespace HelloDungeon
             bidenBlast.Damage = 9000.01f;
 
 
-            JoePable = new Character("JoePable", 2119f, 246.90f, .9f, 50f, 3, deezHandz);
-            JohnCena = new Character("JOHN.....cena", 2120f, 246.91f, 1f, 25f, 4f, chairAdjustment);
-            LucyJill = new Character("Lucy Jill Dirtbag Biden", 2118f, 246.89f, .8f, 5f, 1f, chairAdjustment);
+            Weapon swardd;
+            swardd.Name = "swardd";
+            swardd.Damage = 6f;
+
+            //these lines are meant to intialize a new character with its stats
+            //this is the next step?
+            JoePable = new Character("JoePable", 19f, 18f, 3f, 50f, 3f, deezHandz);
+            JohnCena = new Character("JOHN.....cena", 21f, 11f, 5f, 25f, 4f, chairAdjustment);
+            LucyJill = new Character("Lucy Jill Dirtbag Biden", 18f, 10f, 4f, 5f, 1f, chairAdjustment);
+
+            Gu7y = new Character("Gh7y", 25f, 10f, 4f, 7f, 5f, swardd);
 
 
 
             //                           0         1         2  
-            Enemies = new Character[3] { JoePable, JohnCena, LucyJill };
+            Enemies = new Character[4] { Gu7y, JoePable, JohnCena, LucyJill };
 
         }
 
