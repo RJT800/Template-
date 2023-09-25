@@ -25,7 +25,7 @@ namespace HelloDungeon
         int currentScene = 0;
 
 
-        //initializes the character (establishing that they exist, not stating their stats)
+        //declares the character (establishing that they exist, not stating their stats)
         //this is the first step?
         Character JoePable;
         Character JohnCena;
