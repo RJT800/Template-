@@ -211,14 +211,14 @@ namespace HelloDungeon
             //this is the next step?
             JoePable = new Character("JoePable", 19f, 18f, 3f, 50f, 3f, deezHandz);
             JohnCena = new Character("JOHN.....cena", 21f, 11f, 5f, 25f, 4f, chairAdjustment);
-            LucyJill = new Character("Lucy Jill Dirtbag Biden", 18f, 10f, 4f, 5f, 1f, chairAdjustment);
+            LucyJill = new Character("Lucy Jill Dirtbag Biden", 18f, 10f, 4f, 5f, 1f, bidenBlast);
 
             Gu7y = new Character("Gh7y", 25f, 10f, 4f, 7f, 5f, swardd);
 
 
 
             //                           0         1         2  
-            Enemies = new Character[4] { Gu7y, JoePable, JohnCena, LucyJill };
+            Enemies = new Character[3] { Gu7y, JoePable, JohnCena };
 
         }
 
